@@ -66,3 +66,48 @@ function renderCart(){
     }
 }
 renderCart();
+
+$$('.add-to-cart').forEach(btn => {
+    btn.addEventListener('click', () => {
+        items.push(btn.dataset.item);
+        renderCart();
+        openCart();
+    });
+});
+
+cartList.addEventListener('click', e => {
+    const idx = e.target.dataset.remove;
+    if(typeof idx !== 'undefined'){
+        items.splice(Number(idx), 1);
+        renderCart();
+    }
+});
+cartClear.addEventListener('click', () => { items = []; renderCart(); });
+
+function openCart(){ cart.setAttribute('aria-hidden','false'); }
+function closeCart(){ cart.setAttribute('aria-hidden','true'); }
+cartFab.addEventListener('click', openCart);
+cartClose.addEventListener('click', closeCart);
+
+/* CTA del carrito salta al formulario */
+cartCTA.addEventListener('click', e => {
+    const jump = e.currentTarget.dataset.jump;
+    if(jump){ document.querySelector(jump)?.scrollIntoView({behavior:'smooth'}); }
+    closeCart();
+});
+
+/* Footer año */
+$('#year').textContent = new Date().getFullYear();
+
+/* Formulario de pedido (demo local) */
+const form = $('#order-form');
+const formMsg = $('#form-msg');
+
+form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const data = Object.fromEntries(new FormData(form));
+    // Mensaje de confirmación simulado
+    formMsg.textContent = `¡Gracias ${data.nombre}! Te escribiremos a ${data.telefono} para confirmar tu pedido.`;
+    form.reset();
+    // Podrías integrar aquí WhatsApp, EmailJS o tu backend.
+});
