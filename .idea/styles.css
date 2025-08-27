@@ -139,3 +139,30 @@ input:focus, textarea:focus{ outline:3px solid var(--ring); border-color:var(--p
     position: fixed; right:1rem; bottom:1rem; width:52px; height:52px; border-radius:50%;
     border:none; background:var(--primary); color:#fff; font-size:1.3rem; box-shadow: var(--shadow); cursor:pointer;
 }
+/* Footer */
+.footer{ border-top:1px solid #eee; margin-top:2rem; }
+.footer__inner{ display:flex; align-items:center; justify-content:space-between; gap:1rem; padding:1rem 0; }
+.footer__link{ color:var(--muted); margin-left:.8rem; }
+
+/* Utils */
+.section .btn + .btn{ margin-left:.5rem; }
+
+/* Responsive */
+@media (max-width: 860px){
+    .grid--2{ grid-template-columns: 1fr; }
+    .nav{ position: fixed; inset: 64px 0 auto 0; background:#fff; border-bottom:1px solid #eee; transform: translateY(-120%); transition: transform .2s ease; }
+    .nav[aria-expanded="true"]{ transform: translateY(0); }
+    .nav__list{ padding: .8rem 1rem; gap:.3rem; }
+    .nav__link{ display:block; padding: .8rem 1rem; }
+    .nav-toggle{ display:inline-block; }
+}
+
+/* Focus visible */
+:focus-visible{ outline:3px solid var(--ring); outline-offset:2px; }
+
+/* Little touches */
+.header, .card, .menu__item, .form, .feature__stat{ animation: fadeInUp .4s ease both; }
+@keyframes fadeInUp{
+    from{ opacity:0; transform: translateY(8px); }
+    to{ opacity:1; transform:none; }
+}
